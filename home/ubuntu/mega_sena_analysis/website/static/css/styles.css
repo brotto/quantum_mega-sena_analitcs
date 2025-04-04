@@ -1,0 +1,227 @@
+/* Estilos gerais para o MegaSenaPredictor */
+
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+}
+
+body {
+    background-color: #f5f5f5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilos para a navegação */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Estilos para cards */
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    font-weight: bold;
+    padding: 12px 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Estilos para seções */
+section {
+    padding-top: 20px;
+    margin-bottom: 40px;
+}
+
+section h2 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Estilos para botões */
+.btn {
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+/* Estilos para bolas de números */
+.numero-bola {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.numero-bola-pequena {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+}
+
+.numero-bola-grande {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+}
+
+/* Estilos para previsões */
+.previsao-item {
+    border-left: 4px solid var(--primary-color);
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: white;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.previsao-alta {
+    border-left-color: var(--success-color);
+}
+
+.previsao-media {
+    border-left-color: var(--warning-color);
+}
+
+.previsao-baixa {
+    border-left-color: var(--danger-color);
+}
+
+.previsao-confianca {
+    height: 5px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.previsao-confianca-valor {
+    height: 100%;
+    border-radius: 5px;
+}
+
+/* Estilos para imagens e gráficos */
+.img-grafico {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para alertas */
+.alert {
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilos para formulários */
+.form-control {
+    border-radius: 5px;
+    padding: 10px 15px;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Estilos para tabelas */
+.table {
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+/* Estilos para validação */
+.validacao-resultado {
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 15px;
+    }
+    
+    .numero-bola {
+        width: 35px;
+        height: 35px;
+        margin: 3px;
+    }
+    
+    .numero-bola-grande {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Estilos para scrollspy */
+body {
+    position: relative;
+}
+
+.nav-link.active {
+    font-weight: bold;
+    background-color: rgba(13, 110, 253, 0.1);
+    border-radius: 5px;
+}

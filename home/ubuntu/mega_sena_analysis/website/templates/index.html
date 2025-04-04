@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MegaSenaPredictor - Previsões para Mega Sena</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-dice"></i> MegaSenaPredictor
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#inicio">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#estatisticas">Estatísticas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#raizes">Números Raízes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#previsoes">Previsões</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#validacao">Validação</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sobre">Sobre</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Mensagens de alerta -->
+        <div id="alertContainer"></div>
+
+        <!-- Seção de Início -->
+        <section id="inicio" class="mb-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h2 class="card-title">Bem-vindo ao MegaSenaPredictor</h2>
+                            <p class="card-text">
+                                Este sistema analisa dados históricos da Mega Sena e utiliza algoritmos avançados, 
+                                incluindo simulação de computação quântica, para detectar possíveis padrões e gerar 
+                                previsões para jogos futuros.
+                            </p>
+                            <p class="card-text">
+                                Nossa abordagem é baseada na hipótese de que os números da Mega Sena são gerados 
+                                artificialmente a partir de "números raízes" que podem mudar ao longo do tempo.
+                            </p>
+                            <div class="d-grid gap-2">
+                                <button id="btnCarregarDados" class="btn btn-primary">
+                                    <i class="fas fa-database"></i> Carregar Dados Históricos
+                                </button>
+                                <button id="btnBaixarDados" class="btn btn-outline-primary">
+                                    <i class="fas fa-download"></i> Baixar Dados Atualizados
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title">Status dos Dados</h3>
+                            <div id="statusDados">
+                                <div class="text-center py-5">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Carregando...</span>
+                                    </div>
+                                    <p class="mt-2">Verificando dados...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card shadow-sm mt-3">
+                        <div class="card-body">
+                            <h3 class="card-title">Adicionar Sorteio Recente</h3>
+                            <p class="card-text">Mantenha a base de dados atualizada adicionando os resultados mais recentes.</p>
+                            <form id="formAdicionarSorteio" class="row g-3">
+                                <div class="col-md-12">
+                                    <label for="inputNumeros" class="form-label">Números (separados por vírgula)</label>
+                                    <input type="text" class="form-control" id="inputNumeros" placeholder="Ex: 10,25,30,35,42,55">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-plus-circle"></i> Adicionar Sorteio
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Estatísticas -->
+        <section id="estatisticas" class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0"><i class="fas fa-chart-bar"></i> Estatísticas da Mega Sena</h2>
+                </div>
+                <div class="card-body">
+                    <div id="loadingEstatisticas" class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Carregando...</span>
+                        </div>
+                        <p class="mt-2">Carregando estatísticas...</p>
+                    </div>
+                    <div id="conteudoEstatisticas" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-header">Números Mais Frequentes</div>
+                                    <div class="card-body">
+                                        <div id="numerosMaisFrequentes" class="d-flex flex-wrap justify-content-center"></div>
+                                    </div>
+                                </div>
+                                <div class="card mb-3">
+                                    <div class="card-header">Números Menos Frequentes</div>
+                                    <div class="card-body">
+                                        <div id="numerosMenosFrequentes" class="d-flex flex-wrap justify-content-center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-header">Distribuição de Paridade</div>
+                                    <div class="card-body">
+                                        <canvas id="graficoParidade" width="400" height="200"></canvas>
+                                    </div>
+                                </div>
+                                <div class="card mb-3">
+                                    <div class="card-header">Distribuição por Dezenas</div>
+                                    <div class="card-body">
+                                        <canvas id="graficoDezenas" width="400" height="200"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">Frequência dos Números</div>
+                                    <div class="card-body">
+                                        <div id="graficoFrequencia" class="text-center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Números Raízes -->
+        <section id="raizes" class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0"><i class="fas fa-key"></i> Detecção de Números Raízes</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Detecte possíveis "números raízes" que poderiam estar gerando os resultados da Mega Sena.
+                        O sistema analisa os dados históricos em janelas temporais e identifica pontos de mudança onde os padrões se alteram.
+                    </p>
+                    <form id="formDetectarRaizes" class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="tamanhoJanela" class="form-label">Tamanho da Janela</label>
+                            <input type="number" class="form-control" id="tamanhoJanela" value="50" min="10" max="200">
+                            <div class="form-text">Número de sorteios em cada janela de análise.</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="numeroRaizes" class="form-label">Número de Raízes</label>
+                            <input type="number" class="form-control" id="numeroRaizes" value="3" min="1" max="6">
+                            <div class="form-text">Quantidade de números raízes a detectar por janela.</div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i> Detectar Números Raízes
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div id="loadingRaizes" class="text-center py-5" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Carregando...</span>
+                        </div>
+                        <p class="mt-2">Detectando números raízes...</p>
+                    </div>
+                    
+                    <div id="resultadoRaizes" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-header">Números Raízes Recentes</div>
+                                    <div class="card-body">
+                                        <div id="raizesRecentes" class="d-flex flex-wrap justify-content-center"></div>
+                                    </div>
+                                </div>
+                                <div class="card mb-3">
+                                    <div class="card-header">Pontos de Mudança</div>
+                                    <div class="card-body">
+                                        <div id="pontosMudanca"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Evolução dos Números Raízes</div>
+                                    <div class="card-body">
+                                        <div id="graficoEvolucaoRaizes" class="text-center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Previsões -->
+        <section id="previsoes" class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0"><i class="fas fa-crystal-ball"></i> Previsões para Jogos Futuros</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        Gere previsões para jogos futuros da Mega Sena baseadas em diferentes métodos,
+                        incluindo análise de números raízes, frequência histórica, paridade e distribuição por dezenas.
+                    </p>
+                    <form id="formGerarPrevisoes" class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="numeroPrevisoes" class="form-label">Número de Previsões</label>
+                            <input type="number" class="form-control" id="numeroPrevisoes" value="5" min="1" max="10">
+                            <div class="form-text">Quantidade de jogos a gerar.</div>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-magic"></i> Gerar Previsões
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div id="loadingPrevisoes" class="text-center py-5" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Carregando...</span>
+                        </div>
+                        <p class="mt-2">Gerando previsões...</p>
+                    </div>
+                    
+                    <div id="resultadoPrevisoes" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-header">Jogos Previstos</div>
+                                    <div class="card-body">
+                                        <div id="jogosPrevistos"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-header">Visualização das Previsões</div>
+                                    <div class="card-body">
+                                        <div id="graficoPrevisoes" class="text-center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Validação -->
+        <section id="validacao" class="mb-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0"
+(Content truncated due to size limit. Use line ranges to read in chunks)
