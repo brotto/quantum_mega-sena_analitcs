@@ -1139,7 +1139,7 @@ class MegaSenaPredictor:
                 .number-ball {{ display: inline-block; width: 30px; height: 30px; line-height: 30px; text-align: center; 
                                background-color: #3498db; color: white; border-radius: 50%; margin-right: 5px; }}
                 img {{ max-width: 100%; height: auto; margin: 20px 0; border: 1px solid #ddd; }}
-                .footer {{ margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.9em; color: #777; }}
+                .footer {git remote add origin https://github.com/USUARIO/NOME_REPOSITORIO.git{ margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.9em; color: #777; }}
             </style>
         </head>
         <body>
