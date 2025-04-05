@@ -34,7 +34,7 @@ if st.sidebar.button("📈 Detectar períodos de estabilidade"):
     st.image(os.path.join(predictor.output_dir, "periodos_estabilidade.png"))
     st.success("Períodos detectados.")
 
-    periodo_atual = predictor.periodos_estaveis[-1] if predictor.periodos_estaveis else None
+    periodo_atual = predictor.periodos_estabilidade[-1] if predictor.periodos_estabilidade else None
 
     if periodo_atual:
         st.markdown("### 🔍 Análise do Período Atual")
