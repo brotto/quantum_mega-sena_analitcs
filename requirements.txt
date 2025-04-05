@@ -1,0 +1,7 @@
+streamlit
+matplotlib
+numpy
+pandas
+tqdm
+requests
+pennylane
