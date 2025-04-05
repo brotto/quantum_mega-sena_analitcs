@@ -606,13 +606,25 @@ class MegaSenaPredictor:
         plt.figure(figsize=(12, 8))
         
         # Plotar distribuições de probabilidade para cada qubit
+        n = len(resultados_quanticos)
+        cols = 2
+        rows = (n + 1) // cols
+        fig, axs = plt.subplots(rows, cols, figsize=(10, 5 * rows))
+        axs = axs.flatten()
+
         for i, probs in enumerate(resultados_quanticos):
-            plt.subplot(3, 2, i+1)
-            plt.bar(range(len(probs)), probs)
-            plt.title(f'Qubit {i}')
-            plt.xlabel('Estado')
-            plt.ylabel('Probabilidade')
-            plt.grid(True, alpha=0.3)
+            axs[i].bar(range(len(probs)), probs)
+            axs[i].set_title(f'Qubit {i}')
+            axs[i].set_xlabel('Estado')
+            axs[i].set_ylabel('Probabilidade')
+            axs[i].grid(True, alpha=0.3)
+
+        for j in range(i + 1, len(axs)):
+            fig.delaxes(axs[j])
+
+        plt.tight_layout()
+        plt.savefig(os.path.join(self.output_dir, "resultados_quanticos.png"))
+        plt.close()
         
         plt.tight_layout()
         
@@ -1139,7 +1151,7 @@ class MegaSenaPredictor:
                 .number-ball {{ display: inline-block; width: 30px; height: 30px; line-height: 30px; text-align: center; 
                                background-color: #3498db; color: white; border-radius: 50%; margin-right: 5px; }}
                 img {{ max-width: 100%; height: auto; margin: 20px 0; border: 1px solid #ddd; }}
-                .footer {git remote add origin https://github.com/USUARIO/NOME_REPOSITORIO.git{ margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.9em; color: #777; }}
+                .footer {{ margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.9em; color: #777; }}
             </style>
         </head>
         <body>
