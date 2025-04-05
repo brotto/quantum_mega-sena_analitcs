@@ -34,6 +34,18 @@ if st.sidebar.button("📈 Detectar períodos de estabilidade"):
     st.image(os.path.join(predictor.output_dir, "periodos_estabilidade.png"))
     st.success("Períodos detectados.")
 
+    periodo_atual = predictor.periodos_estaveis[-1] if predictor.periodos_estaveis else None
+
+    if periodo_atual:
+        st.markdown("### 🔍 Análise do Período Atual")
+        st.markdown(f"O período atual começou no sorteio **{periodo_atual['inicio']}** e já dura **{periodo_atual['tamanho']}** sorteios.")
+        if periodo_atual['tamanho'] >= 10:
+            st.success("Este é um período estável relativamente longo. Pode ser um bom momento para aplicar estratégias baseadas em números raízes.")
+        else:
+            st.warning("O período atual é recente. Estratégias baseadas em estabilidade podem ter desempenho incerto neste momento.")
+    else:
+        st.info("Não foi possível identificar um período atual de estabilidade.")
+
 if st.sidebar.button("⚛️ Simulação quântica"):
     result = predictor.simular_computacao_quantica(n_qubits=n_qubits)
     if result:
