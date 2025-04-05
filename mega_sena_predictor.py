@@ -382,6 +382,7 @@ class MegaSenaPredictor:
         
         # Visualizar períodos
         self._visualizar_periodos_estabilidade()
+        self.periodos_estaveis = self.periodos_estabilidade
         
         return self.periodos_estabilidade
     
@@ -476,6 +477,8 @@ class MegaSenaPredictor:
         
         # Preparar dados de entrada
         dados_entrada = self._preparar_dados_entrada(sorteios_recentes)
+        if len(dados_entrada) == 0:
+            raise ValueError("Não há dados suficientes para a simulação quântica. Certifique-se de carregar os dados antes.")
         
         # Criar dispositivo quântico
         dev = qml.device("default.qubit", wires=n_qubits)
@@ -489,6 +492,8 @@ class MegaSenaPredictor:
             
             # Aplicar operações baseadas nos dados
             for i in range(n_qubits):
+                if len(dados_entrada) == 0:
+                    raise ValueError("dados_entrada está vazio. Verifique se os sorteios foram carregados corretamente.")
                 idx = i % len(dados_entrada)
                 qml.RY(np.pi * dados_entrada[idx], wires=i)
             
