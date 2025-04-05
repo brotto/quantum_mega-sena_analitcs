@@ -2,6 +2,7 @@ import streamlit as st
 from mega_sena_predictor import MegaSenaPredictor
 from raizes_grafico_streamlit import exibir_evolucao_raizes
 import os
+from interprete_ia import interpretar_estabilidade_via_ia
 
 # Inicializar o sistema
 predictor = MegaSenaPredictor()
@@ -59,6 +60,11 @@ if st.sidebar.button("📈 Detectar períodos de estabilidade"):
             st.info("🟡 Recomendação: Combinar raízes com padrões históricos — estratégia de equilíbrio.")
         else:
             st.warning("🔴 Recomendação: Aguardar ou variar suas apostas enquanto o padrão se estabiliza.")
+        
+        # Interpretação por IA com base no período atual
+        interpretacao = interpretar_estabilidade_via_ia(periodo_atual, len(predictor.periodos_estabilidade))
+        st.markdown("### 🤖 Interpretação da IA")
+        st.markdown(interpretacao)
     else:
         st.info("Não foi possível identificar um período atual de estabilidade.")
 
