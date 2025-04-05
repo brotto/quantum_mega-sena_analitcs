@@ -1,5 +1,6 @@
 import streamlit as st
 from mega_sena_predictor import MegaSenaPredictor
+from raizes_grafico_streamlit import exibir_evolucao_raizes
 import os
 
 # Inicializar o sistema
@@ -25,8 +26,8 @@ if st.sidebar.button("🔁 Carregar dados"):
 
 if st.sidebar.button("🔍 Detectar números raízes"):
     predictor.detectar_numeros_raizes(tamanho_janela=janela, n_raizes=n_raizes)
-    st.image(os.path.join(predictor.output_dir, "evolucao_raizes.png"))
     st.success("Números raízes detectados.")
+    exibir_evolucao_raizes(predictor)
 
 if st.sidebar.button("📈 Detectar períodos de estabilidade"):
     predictor.detectar_periodos_estabilidade()
