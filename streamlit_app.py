@@ -51,6 +51,14 @@ if st.sidebar.button("📈 Detectar períodos de estabilidade"):
             st.markdown("- Estratégia sugerida: **usar os números raízes como âncora**, combinando com dezenas mais frequentes ou pares históricos.")
         else:
             st.markdown("- Estratégia sugerida: **aguardar mais sorteios ou diversificar jogos**, pois o padrão ainda está se formando.")
+        
+        st.markdown("### ✅ Ação Ideal no Período Atual")
+        if periodo_atual['tamanho'] >= 15:
+            st.success("🟢 Recomendação: Aplicar estratégias agressivas baseadas em raízes — como fixar 3 a 4 dezenas raízes por jogo.")
+        elif periodo_atual['tamanho'] >= 10:
+            st.info("🟡 Recomendação: Combinar raízes com padrões históricos — estratégia de equilíbrio.")
+        else:
+            st.warning("🔴 Recomendação: Aguardar ou variar suas apostas enquanto o padrão se estabiliza.")
     else:
         st.info("Não foi possível identificar um período atual de estabilidade.")
 
