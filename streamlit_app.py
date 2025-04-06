@@ -68,12 +68,23 @@ if st.sidebar.button("📈 Detectar períodos de estabilidade"):
     else:
         st.info("Não foi possível identificar um período atual de estabilidade.")
 
+        # Chamar IA mesmo sem período atual
+        interpretacao = interpretar_estabilidade_via_ia(None, len(predictor.periodos_estabilidade))
+        st.markdown("### 🤖 Interpretação da IA")
+        st.markdown(interpretacao)
+
 if st.sidebar.button("⚛️ Simulação quântica"):
-    result = predictor.simular_computacao_quantica(n_qubits=n_qubits)
-    if result:
-        st.image(os.path.join(predictor.output_dir, "resultados_quanticos.png"), caption="Resultados Quânticos")
-        st.image(os.path.join(predictor.output_dir, "numeros_quanticos.png"), caption="Números Previstos")
-        st.success(f"Números previstos: {result['numeros_previstos']}")
+    if not predictor.sorteios or len(predictor.sorteios) < 20:
+        st.warning("Simulação indisponível: são necessários pelo menos 20 sorteios carregados para rodar a simulação quântica.")
+    else:
+        try:
+            result = predictor.simular_computacao_quantica(n_qubits=n_qubits)
+            if result:
+                st.image(os.path.join(predictor.output_dir, "resultados_quanticos.png"), caption="Resultados Quânticos")
+                st.image(os.path.join(predictor.output_dir, "numeros_quanticos.png"), caption="Números Previstos")
+                st.success(f"Números previstos: {result['numeros_previstos']}")
+        except Exception as e:
+            st.error(f"Erro durante a simulação quântica: {e}")
 
 if st.sidebar.button("🎯 Gerar previsões"):
     previsoes = predictor.gerar_previsoes()

@@ -4,8 +4,8 @@ import plotly.graph_objects as go
 
 
 def exibir_evolucao_raizes(predictor):
-    if not predictor.numeros_raizes:
-        st.warning("Nenhum número raiz detectado ainda. Por favor, execute a detecção primeiro.")
+    if not predictor.numeros_raizes or len(predictor.numeros_raizes) == 0:
+        st.warning("Não há números raízes suficientes para exibir o gráfico.")
         return
 
     st.subheader("Evolução dos Números Raízes ao Longo do Tempo")
