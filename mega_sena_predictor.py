@@ -1378,6 +1378,13 @@ def menu_interativo(predictor):
         elif opcao == "3":
             min_tamanho = int(input("Tamanho mínimo de um período (padrão: 20): ") or "20")
             predictor.detectar_periodos_estabilidade(min_tamanho=min_tamanho)
+            from interprete_ia import interpretar_estabilidade_via_ia
+            periodo_atual = predictor.periodos_estaveis[-1] if predictor.periodos_estaveis else None
+            interpretacao = interpretar_estabilidade_via_ia(periodo_atual, len(predictor.periodos_estaveis))
+            print("\n💬 Interpretação da IA:")
+            print("-" * 60)
+            print(interpretacao)
+            print("-" * 60)
         
         elif opcao == "4":
             n_qubits = int(input("Número de qubits (padrão: 6): ") or "6")
